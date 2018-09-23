@@ -21,7 +21,6 @@ public class GameController : MonoBehaviour {
 	private float daySecondsLeft;
 	private float nightSecondsLeft;
 	private bool gameRunning = true;
-
 	private GameObject spawnedButton = null;
 
 	void Start() {
@@ -30,16 +29,7 @@ public class GameController : MonoBehaviour {
 		wintext.enabled = false;
 		UpdateDayText(Mathf.RoundToInt(daySecondsLeft).ToString());
 		UpdateNightText(Mathf.RoundToInt(nightSecondsLeft).ToString());
-		RandomButton();
-	}
-
-	void RandomButton() {
-		var minwidth = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f)).x;
-		var maxwidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0f, 0f)).x;
-		var minheight = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f)).y;
-		var maxheight = Camera.main.ScreenToWorldPoint(new Vector3(0f, Screen.height, 0f)).y;
-		spawnedButton = Instantiate(button, new Vector3(Random.Range(minwidth, maxwidth), Random.Range(minheight, maxheight)), Quaternion.identity);
-		spawnedButton.GetComponent<LightToggle>().daylight = daylight;
+		StartCoroutine(RandomButton(true));
 	}
 	
 	// Update is called once per frame
@@ -67,7 +57,23 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (gameRunning && spawnedButton == null) {
-			RandomButton();
+			StartCoroutine(RandomButton());
+		}
+	}
+
+	IEnumerator RandomButton(bool now = false) {
+		var minwidth = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f)).x;
+		var maxwidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0f, 0f)).x;
+		var minheight = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f)).y;
+		var maxheight = Camera.main.ScreenToWorldPoint(new Vector3(0f, Screen.height, 0f)).y;
+		spawnedButton = Instantiate(button, new Vector3(Random.Range(minwidth, maxwidth), Random.Range(minheight, maxheight)), Quaternion.identity);
+		spawnedButton.SetActive(false);
+		spawnedButton.GetComponent<LightToggle>().daylight = daylight;
+		if (!now) {
+        	yield return new WaitForSeconds(1);
+		}
+		if (spawnedButton != null) {
+			spawnedButton.SetActive(true);
 		}
 	}
 
