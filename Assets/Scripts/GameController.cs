@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,10 +18,15 @@ public class GameController : MonoBehaviour {
 	public int time = 30;
 	[SerializeField]
 	public GameObject button;
+	[SerializeField]
+	public GameObject indicateur;
+	[SerializeField]
+	public GameObject[] joueurs;
 
 	private float daySecondsLeft;
 	private float nightSecondsLeft;
 	private bool gameRunning = true;
+	private GameObject spawnedIndicator = null;
 	private GameObject spawnedButton = null;
 
 	void Start() {
@@ -56,7 +62,7 @@ public class GameController : MonoBehaviour {
 			gameRunning = false;
 		}
 
-		if (gameRunning && spawnedButton == null) {
+		if (gameRunning && spawnedIndicator == null && spawnedButton == null) {
 			StartCoroutine(RandomButton());
 		}
 	}
@@ -66,18 +72,23 @@ public class GameController : MonoBehaviour {
 		var maxwidth = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0f, 0f)).x;
 		var minheight = Camera.main.ScreenToWorldPoint(new Vector3(0f, 0f, 0f)).y;
 		var maxheight = Camera.main.ScreenToWorldPoint(new Vector3(0f, Screen.height, 0f)).y;
-		spawnedButton = Instantiate(button, new Vector3(Random.Range(minwidth, maxwidth), Random.Range(minheight, maxheight)), Quaternion.identity);
-		spawnedButton.SetActive(false);
-		spawnedButton.GetComponent<LightToggle>().daylight = daylight;
+		spawnedIndicator = Instantiate(indicateur, new Vector3(Random.Range(minwidth, maxwidth), Random.Range(minheight + 0.5f, maxheight)), Quaternion.identity);
 		if (!now) {
         	yield return new WaitForSeconds(1);
 		}
-		if (spawnedButton != null) {
-			spawnedButton.SetActive(true);
-		}
+		spawnedButton = Instantiate(button, spawnedIndicator.transform.position, Quaternion.identity);
+		Destroy(spawnedIndicator);
+		spawnedButton.GetComponent<LightToggle>().daylight = daylight;
+		spawnedButton.SetActive(true);
 	}
 
-	void UpdateDayText(string text) {
+    private bool ButtonIsInPlayers(GameObject button)
+    {
+		var spawnedButtonBounds = button.GetComponent<Collider2D>().bounds;
+        return joueurs.All((joueur) => joueur.GetComponent<Collider2D>().bounds.Intersects(spawnedButtonBounds));
+    }
+
+    void UpdateDayText(string text) {
 		if (gameRunning) {
 			daytext.text = "Jour: " + text + "s";
 		}

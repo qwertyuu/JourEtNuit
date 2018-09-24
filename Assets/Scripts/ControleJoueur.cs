@@ -7,19 +7,22 @@ public class ControleJoueur : MonoBehaviour {
     public float turnSpeed = 6.0f;
 	[SerializeField]
 	public int joueur = 1;
+	[SerializeField]
+	public GameObject attaque;
+	[SerializeField]
+	public int forceAttaque = 50;
+	[SerializeField]
+	public float cooldown = 2;
 
     private Vector2 moveDirection = Vector2.zero;
 
-	private Rigidbody2D a;
+	private Rigidbody2D rb;
+
+	private bool estEnTrainDattaquer = false;
 
 	// Use this for initialization
 	void Start () {
-		a = GetComponent<Rigidbody2D>();
-	}
-
-	void OnCollisionEnter2D(Collision2D c)
-	{
-		//a.isKinematic = true;
+		rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
@@ -33,6 +36,23 @@ public class ControleJoueur : MonoBehaviour {
 			transform.rotation = Quaternion.Slerp(transform.rotation, goalRot, turnSpeed * Time.fixedDeltaTime);
 		}
 
-		a.AddForce(moveDirection * speed * 1000 * Time.fixedDeltaTime);
+		rb.AddForce(moveDirection * speed * 1000 * Time.fixedDeltaTime);
+	}
+
+	void Update () {
+		if (!estEnTrainDattaquer && Input.GetButtonDown("Attaque_P" + joueur)) {
+			StartCoroutine(Attaquer());
+		}
+	}
+
+	IEnumerator Attaquer() {
+		estEnTrainDattaquer = true;
+		var attaqueObj = Instantiate(attaque, transform);
+		attaqueObj.transform.Translate(0, 0.85f, 0);
+		attaqueObj.GetComponent<Attaque>().force = forceAttaque;
+		yield return new WaitForSeconds(0.2f);
+		Destroy(attaqueObj);
+		yield return new WaitForSeconds(cooldown);
+		estEnTrainDattaquer = false;
 	}
 }

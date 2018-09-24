@@ -418,8 +418,12 @@ MonoBehaviour:
   daytext: {fileID: 1644789981}
   nighttext: {fileID: 447860889}
   wintext: {fileID: 884359620}
-  time: 5
+  time: 20
   button: {fileID: 1256391066639118, guid: dfbb81c59ed5a10438e30659b6c046e3, type: 2}
+  indicateur: {fileID: 1543630722210552, guid: c0b20a45158452341a5a45d33a8bf6b0, type: 2}
+  joueurs:
+  - {fileID: 1401842002}
+  - {fileID: 1584724668}
 --- !u!4 &558041018
 Transform:
   m_ObjectHideFlags: 0
@@ -476,15 +480,26 @@ Prefab:
       propertyPath: m_Name
       value: Joueur2
       objectReference: {fileID: 0}
+    - target: {fileID: 50291570565422426, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 114777626889983838, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
         type: 2}
       propertyPath: joueur
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 50291570565422426, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
+    - target: {fileID: 114777626889983838, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
         type: 2}
-      propertyPath: m_Constraints
-      value: 4
+      propertyPath: attaque
+      value: 
+      objectReference: {fileID: 1893500258007468, guid: aa4d93a0aa67094449f6cbc58205dba7,
+        type: 2}
+    - target: {fileID: 114777626889983838, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
+        type: 2}
+      propertyPath: forceAttaque
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b0b4b8a249edc4bbbe39c45f97c486, type: 2}
@@ -752,6 +767,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4764475152486482, guid: 40ba9c7312f2d8f428cd3eb840869d33,
     type: 2}
   m_PrefabInternal: {fileID: 1048989470}
+--- !u!1 &1401842002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1438181678361744, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
+    type: 2}
+  m_PrefabInternal: {fileID: 1827492881}
+--- !u!1 &1584724668 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1438181678361744, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
+    type: 2}
+  m_PrefabInternal: {fileID: 726403803}
 --- !u!1 &1644789979
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,6 +1023,29 @@ Prefab:
         type: 2}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578819880062790, guid: 78b0b4b8a249edc4bbbe39c45f97c486, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578819880062790, guid: 78b0b4b8a249edc4bbbe39c45f97c486, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4578819880062790, guid: 78b0b4b8a249edc4bbbe39c45f97c486, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114777626889983838, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
+        type: 2}
+      propertyPath: attaque
+      value: 
+      objectReference: {fileID: 1893500258007468, guid: aa4d93a0aa67094449f6cbc58205dba7,
+        type: 2}
+    - target: {fileID: 114777626889983838, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
+        type: 2}
+      propertyPath: forceAttaque
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b0b4b8a249edc4bbbe39c45f97c486, type: 2}
