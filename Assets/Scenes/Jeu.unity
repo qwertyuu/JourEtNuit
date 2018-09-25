@@ -419,7 +419,7 @@ MonoBehaviour:
   nighttext: {fileID: 447860889}
   wintext: {fileID: 884359620}
   time: 20
-  button: {fileID: 1256391066639118, guid: dfbb81c59ed5a10438e30659b6c046e3, type: 2}
+  button: {fileID: 1399623902036514, guid: dfbb81c59ed5a10438e30659b6c046e3, type: 2}
   indicateur: {fileID: 1543630722210552, guid: c0b20a45158452341a5a45d33a8bf6b0, type: 2}
   joueurs:
   - {fileID: 1401842002}
@@ -499,7 +499,7 @@ Prefab:
     - target: {fileID: 114777626889983838, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
         type: 2}
       propertyPath: forceAttaque
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b0b4b8a249edc4bbbe39c45f97c486, type: 2}
@@ -1045,7 +1045,7 @@ Prefab:
     - target: {fileID: 114777626889983838, guid: 78b0b4b8a249edc4bbbe39c45f97c486,
         type: 2}
       propertyPath: forceAttaque
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b0b4b8a249edc4bbbe39c45f97c486, type: 2}
