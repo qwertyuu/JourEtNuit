@@ -10,11 +10,30 @@ public class LightToggle : MonoBehaviour {
 	public GameObject timer;
 	[SerializeField]
 	public float tempsPourAppuyer = 2;
+	[SerializeField]
+	public Sprite daySkin;
+	[SerializeField]
+	public Sprite daySkinHover;
+	[SerializeField]
+	public Sprite nightSkin;
+	[SerializeField]
+	public Sprite nightSkinHover;
 
 	private int nombreDeJoueursSurLeBouton = 0;
 	private GameObject activeTimer;
 
+	void Start() {
+		GetComponent<SpriteRenderer>().sprite = daylight.isNight() 
+			? daySkin
+			: nightSkin;
+		GetComponent<SpriteRenderer>().drawMode = SpriteDrawMode.Sliced;
+		GetComponent<SpriteRenderer>().size = new Vector2(0.18f, 0.18f);
+	}
+
 	void DeleteTimer() {
+		GetComponent<SpriteRenderer>().sprite = daylight.isNight() 
+			? daySkin
+			: nightSkin;
 		Destroy(activeTimer);
 	}
 
@@ -25,6 +44,9 @@ public class LightToggle : MonoBehaviour {
 		
 		t.GetComponent<Timer>().temps = tempsPourAppuyer;
 		activeTimer = t;
+		GetComponent<SpriteRenderer>().sprite = daylight.isNight() 
+			? daySkinHover
+			: nightSkinHover;
 	}
 
 	void OnTriggerExit2D() {

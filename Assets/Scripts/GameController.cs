@@ -13,7 +13,9 @@ public class GameController : MonoBehaviour {
 	[SerializeField]
 	public Text nighttext;
 	[SerializeField]
-	public Text wintext;
+	public GameObject daywin;
+	[SerializeField]
+	public GameObject nightwin;
 	[SerializeField]
 	public int time = 30;
 	[SerializeField]
@@ -32,7 +34,6 @@ public class GameController : MonoBehaviour {
 	void Start() {
 		daySecondsLeft = time + 0.499999f;
 		nightSecondsLeft = time + 0.499999f;
-		wintext.enabled = false;
 		UpdateDayText(Mathf.RoundToInt(daySecondsLeft).ToString());
 		UpdateNightText(Mathf.RoundToInt(nightSecondsLeft).ToString());
 		StartCoroutine(RandomButton(true));
@@ -54,8 +55,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (gameRunning && updatedSecondsLeft == 0) {
-			wintext.text = daylight.isDay() ? "Le jour gagne!" : "La chauve-souris gagne!";
-			wintext.enabled = true;
+			(daylight.isDay() ? daywin : nightwin).SetActive(true);
 			if (spawnedButton != null) {
 				Destroy(spawnedButton);
 			}
@@ -102,13 +102,11 @@ public class GameController : MonoBehaviour {
 
 	void SetNightTheme() {
 		nighttext.color 
-		= wintext.color
 		= daytext.color = new Color(205 / 255f, 205 / 255f, 205 / 255f);
 	}
 
 	void SetDayTheme() {
 		nighttext.color 
-		= wintext.color
 		= daytext.color = new Color(50 / 255f, 50 / 255f, 50 / 255f);
 	}
 }
