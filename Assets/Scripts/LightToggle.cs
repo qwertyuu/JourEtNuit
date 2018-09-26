@@ -21,11 +21,14 @@ public class LightToggle : MonoBehaviour {
 
 	private int nombreDeJoueursSurLeBouton = 0;
 	private GameObject activeTimer;
+	private bool isSpriteSet = false;
 
 	void Start() {
-		GetComponent<SpriteRenderer>().sprite = daylight.isNight() 
-			? daySkin
-			: nightSkin;
+		if (!isSpriteSet) {
+			GetComponent<SpriteRenderer>().sprite = daylight.isNight() 
+				? daySkin
+				: nightSkin;
+		}
 		GetComponent<SpriteRenderer>().drawMode = SpriteDrawMode.Sliced;
 		GetComponent<SpriteRenderer>().size = new Vector2(0.18f, 0.18f);
 	}
@@ -34,6 +37,7 @@ public class LightToggle : MonoBehaviour {
 		GetComponent<SpriteRenderer>().sprite = daylight.isNight() 
 			? daySkin
 			: nightSkin;
+		isSpriteSet = true;
 		Destroy(activeTimer);
 	}
 
@@ -47,6 +51,7 @@ public class LightToggle : MonoBehaviour {
 		GetComponent<SpriteRenderer>().sprite = daylight.isNight() 
 			? daySkinHover
 			: nightSkinHover;
+		isSpriteSet = true;
 	}
 
 	void OnTriggerExit2D(Collider2D other) {
