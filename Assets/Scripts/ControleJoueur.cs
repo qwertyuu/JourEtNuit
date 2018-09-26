@@ -27,7 +27,9 @@ public class ControleJoueur : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		moveDirection = new Vector2(Input.GetAxis("Horizontal_P" + joueur), Input.GetAxis("Vertical_P" + joueur));
+        float x = Input.GetAxis("Horizontal_P" + joueur) + Input.GetAxisRaw("Horizontal_KeybMouse_P" + joueur);
+        float y = Input.GetAxis("Vertical_P" + joueur) + Input.GetAxisRaw("Vertical_KeybMouse_P" + joueur);
+        moveDirection = new Vector2(x, y);
 		var mag = moveDirection.magnitude;
 		GetComponent<Animator>().speed = mag * 5;
 		if (mag > 0.1f) {
@@ -40,7 +42,7 @@ public class ControleJoueur : MonoBehaviour {
 	}
 
 	void Update () {
-		if (!estEnTrainDattaquer && Input.GetButtonDown("Attaque_P" + joueur)) {
+		if (!estEnTrainDattaquer && (Input.GetButtonDown("Attaque_P" + joueur) || Input.GetButtonDown("Attaque_KeybMouse_P" + joueur))) {
 			StartCoroutine(Attaquer());
 		}
 	}
