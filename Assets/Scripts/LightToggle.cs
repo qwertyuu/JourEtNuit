@@ -49,18 +49,22 @@ public class LightToggle : MonoBehaviour {
 			: nightSkinHover;
 	}
 
-	void OnTriggerExit2D() {
-		nombreDeJoueursSurLeBouton--;
-		if (nombreDeJoueursSurLeBouton == 0) {
-			DeleteTimer();
+	void OnTriggerExit2D(Collider2D other) {
+		if (other.tag == "Player") {
+			nombreDeJoueursSurLeBouton--;
+			if (nombreDeJoueursSurLeBouton == 0) {
+				DeleteTimer();
+			}
 		}
 	}
 
-	void OnTriggerEnter2D() {
-		if (nombreDeJoueursSurLeBouton == 0) {
-			NewTimer();
+	void OnTriggerEnter2D(Collider2D other) {
+		if (other.tag == "Player") {
+			if (nombreDeJoueursSurLeBouton == 0) {
+				NewTimer();
+			}
+			nombreDeJoueursSurLeBouton++;
 		}
-		nombreDeJoueursSurLeBouton++;
 	}
 
 	void Update() {
