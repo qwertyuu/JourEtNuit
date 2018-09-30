@@ -71,6 +71,10 @@ MonoBehaviour:
   daylight: {fileID: 0}
   timer: {fileID: 1638672810893636, guid: 625243ae6c72a8043b644310511d2bf0, type: 2}
   tempsPourAppuyer: 2
+  daySkin: {fileID: 21300000, guid: 28f7427dd7ab9c542b55dafbc2b864eb, type: 3}
+  daySkinHover: {fileID: 21300000, guid: d71bb5777b84a9b47bcbfb45d08b3ac3, type: 3}
+  nightSkin: {fileID: 21300000, guid: acef1bf9ec429844188a21d4a9f43fe7, type: 3}
+  nightSkinHover: {fileID: 21300000, guid: 2c3088897894ba94a8d731a6f633e06c, type: 3}
 --- !u!212 &212533892872721734
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -106,11 +110,11 @@ SpriteRenderer:
   m_SortingLayerID: 485799365
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 28f7427dd7ab9c542b55dafbc2b864eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 0.2, y: 0.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
